@@ -7,9 +7,9 @@ puts "LOAD_PATH: #{$LOAD_PATH}"
 $LOAD_PATH << "#{PROJECT_ROOT_DIR}/lib"
 puts "LOAD_PATH: #{$LOAD_PATH}"
 
-require "dockerfolder.rb"
+require "launch"
 
 if __FILE__ == $0
-  x = Dockerfolder::Dockerfolder.new(ARGV)
+  x = Launch.new(ARGV)
   x.run
 end

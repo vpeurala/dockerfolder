@@ -1,5 +1,5 @@
 require "bundler/setup"
-require "dockerfolder"
+require "launch"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
