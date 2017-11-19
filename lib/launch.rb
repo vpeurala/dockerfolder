@@ -3,12 +3,10 @@ require "dockerfolder/version"
 
 class Launch
   def initialize(argv)
-    puts "Dockerfolder created."
-    options = CommandLineArgs.new().parse_command_line(argv)
-    puts "options: #{options}"
+    @options = CommandLineArgs.new().parse_command_line(argv)
   end
 
-  def run
-    puts "Hello, cockboys!"
+  def run()
+    puts "@options: #{@options}"
   end
 end
