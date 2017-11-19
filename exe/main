@@ -1,8 +1,15 @@
 #!/usr/bin/env ruby
 
-require "dockerfolder"
+PROJECT_ROOT_DIR = `git rev-parse --show-toplevel`.chomp
+puts "PROJECT_ROOT_DIR: #{PROJECT_ROOT_DIR}"
+puts "LOAD_PATH: #{$LOAD_PATH}"
+
+$LOAD_PATH << "#{PROJECT_ROOT_DIR}/lib"
+puts "LOAD_PATH: #{$LOAD_PATH}"
+
+require "dockerfolder.rb"
 
 if __FILE__ == $0
-  x = DockerFolder.new(ARGV)
+  x = Dockerfolder::Dockerfolder.new(ARGV)
   x.run
 end

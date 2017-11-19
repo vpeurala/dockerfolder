@@ -1,9 +1,9 @@
 require "dockerfolder/version"
 
 module Dockerfolder
-  class DockerFolder
+  class Dockerfolder
     def initialize(argv)
-      puts "DockerFolder created!"
+      puts "Dockerfolder created!"
     end
 
     def run
