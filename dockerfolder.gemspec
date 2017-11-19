@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Ville Peurala"]
   spec.email         = ["ville.peurala@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because RubyGems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{Generates a skeleton docker directory for you.}
+  spec.description   = %q{A very simple code generator which makes a "docker folder" with scripts for building an image for your project, creating a container from it, starting and stopping it, and attaching to it (opening a terminal connection to your container). This is meant just as a starting point and you have to modify the generated sources a lot to suit your own project.}
+  spec.homepage      = "https://github.com/vpeurala/dockerfolder"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
