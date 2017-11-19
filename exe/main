@@ -1,11 +1,8 @@
 #!/usr/bin/env ruby
 
 PROJECT_ROOT_DIR = `git rev-parse --show-toplevel`.chomp
-puts "PROJECT_ROOT_DIR: #{PROJECT_ROOT_DIR}"
-puts "LOAD_PATH: #{$LOAD_PATH}"
 
 $LOAD_PATH << "#{PROJECT_ROOT_DIR}/lib"
-puts "LOAD_PATH: #{$LOAD_PATH}"
 
 require "launch"
 
