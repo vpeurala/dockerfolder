@@ -1,0 +1,1 @@
+A very simple code generator which makes a "docker folder" with scripts for building an image for your project, creating a container from it, starting and stopping it, and attaching to it (opening a terminal connection to your container).
