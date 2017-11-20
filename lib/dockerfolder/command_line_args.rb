@@ -1,4 +1,5 @@
 require "optparse"
+require "pp"
 
 class CommandLineArgs
   def initialize()
@@ -6,6 +7,7 @@ class CommandLineArgs
 
   def parse_command_line(argv)
     options = {}
+
     opt_parser = OptionParser.new do |opts|
       opts.banner = "Usage: #{$PROGRAM_NAME} [options]"
 
@@ -19,7 +21,7 @@ class CommandLineArgs
 
       opts.on("-f", "--docker-file DOCKER_FILE", "The path to an already existing Dockerfile which you want to use. The file will be copied to the resulting folder of scripts. For example: --docker-file='/Users/vpeurala/templates/postgresql/Dockerfile'.")
 
-      opts.on("-d", "--directory directory_path", "The path to the directory which will be created. For example: --directory='scripts/dockerfolder' The default is ''./docker'.") do |directory_path|
+      opts.on("-d", "--directory DIRECTORY_PATH", "The path to the directory which will be created. For example: --directory='scripts/dockerfolder' The default is ''./docker'.") do |directory_path|
         options[:directory_path] = directory_path
       end
 
