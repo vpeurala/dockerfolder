@@ -1,5 +1,4 @@
 require "optparse"
-require "pp"
 
 class CommandLineArgs
   def initialize()
@@ -9,7 +8,11 @@ class CommandLineArgs
     options = {}
 
     opt_parser = OptionParser.new do |opts|
-      opts.banner = "Usage: #{$PROGRAM_NAME} [options]"
+      opts.program_name = $PROGRAM_NAME
+
+      opts.version = "0.1.0"
+
+      opts.banner = "Usage: #{opts.program_name} [options]"
 
       opts.on("-b", "--base-image IMAGE_NAME", "The Docker base image on which your Dockerfile is built. For example: --base-image='postgres:10-alpine'. This will be value of the FROM instruction in the generated Dockerfile if you don't supply an existing Dockerfile to #{$PROGRAM_NAME}.") do |image_name|
         options[:image_name] = image_name

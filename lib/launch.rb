@@ -1,5 +1,6 @@
 require "dockerfolder/command_line_args"
 require "dockerfolder/version"
+require "pp"
 
 class Launch
   def initialize(argv)
@@ -8,5 +9,7 @@ class Launch
 
   def run()
     puts "@options: #{@options}"
+    pp @options
+    pp ARGV
   end
 end
