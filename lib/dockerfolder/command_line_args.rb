@@ -40,6 +40,6 @@ EOS
 
     opt_parser.parse!(argv)
 
-    options
+    {:options => options, :argv => argv}
   end
 end
