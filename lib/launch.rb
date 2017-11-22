@@ -4,7 +4,7 @@ require "pp"
 
 class Launch
   def initialize(argv)
-    @configuration = CommandLineArgs.new().parse_command_line(argv)
+    @configuration = CommandLineArgs.new.parse_command_line(argv)
   end
 
   def run()

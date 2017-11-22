@@ -31,10 +31,11 @@ Examples:
   #{opts.program_name} --base-image="alpine:3.6" --container-name="amqp-example" --docker-file="/Users/vpeurala/dockerfiles/amqp.example.dockerfile" --image-name="vpeurala/amqp-example:latest" docker-amqp.example
   #{opts.program_name} --base-image="postgres:10-alpine" docker-db
 
+Options:
       EOS
 
-      opts.on("-b", "--base-image IMAGE_NAME", "The Docker base image on which your Dockerfile is built. For example: --base-image=\"postgres:10-alpine\". This will be value of the FROM instruction in the generated Dockerfile if you don't supply an existing Dockerfile to #{$PROGRAM_NAME}. If you don't supply a value to this option, the default value is \"alpine:3.6\".") do |image_name|
-        options[:image_name] = image_name
+      opts.on("-b", "--base-image IMAGE_NAME", "The Docker base image on which your Dockerfile is built. For example: --base-image=\"postgres:10-alpine\". This will be value of the FROM instruction in the generated Dockerfile if you don't supply an existing Dockerfile to #{$PROGRAM_NAME}. If you don't supply a value to this option, the default value is \"alpine:3.6\".") do |base_image|
+        options[:base_image] = base_image
       end
 
       opts.on("-c", "--container-name CONTAINER_NAME", "The name of the Docker container which will be built by the generated scripts. For example: --container-name=\"amqp-example\". If you don't supply a value to this option, the default value will be the name of the git repository containing the resulting docker directory, as obtained by command \"git rev-parse --show-toplevel\".") do |container_name|
@@ -45,7 +46,7 @@ Examples:
         options[:docker_file] = docker_file
       end
 
-      opts.on("-i", "--image-name IMAGE_NAME", "The name of the Docker image which will be built by the generated scripts from the Dockerfile. For example: --image-name=\"vpeurala/amqp-example:latest\". If you don't supply a value to this option, the default value will be your username (for example: vpeurala), slash, name of the git repository containing the resulting docker directory, as obtained by command \"git rev-parse --show-toplevel\" (for example: amqp-example), colon, latest; in this example, it would be \"vpeurala/amqp-example:latest\".") do |image_name|
+      opts.on("-i", "--image-name IMAGE_NAME", "The name of the Docker image which will be built by the generated scripts from the Dockerfile. For example: --image-name=\"vpeurala/amqp-example:latest\". If you don't supply a value to this option, the default value will be your username (for example: vpeurala), slash, name of the git repository containing the resulting docker directory, as obtained by command \"git rev-parse --show-toplevel\" (for example: amqp-example), colon, \"latest\"; in this example, it would be \"vpeurala/amqp-example:latest\".") do |image_name|
         options[:image_name] = image_name
       end
     end
@@ -67,10 +68,24 @@ Examples:
         error_message("ERROR: File \"#{docker_file_name}\", given as the value of option -d/--docker-file, is a directory. It must be an ordinary file.")
         proceed = false
       end
-      if (proceed && !File.readable?(docker_file_name))
+      if proceed && !File.readable?(docker_file_name)
         error_message("ERROR: File \"#{docker_file_name}\", given as the value of option -d/--docker-file, is not readable by user \"#{Etc.getlogin}\".")
         proceed = false
       end
+    end
+
+    unless options.key?(:base_image)
+      options[:base_image] = "alpine:3.6"
+    end
+
+    unless options.key?(:container_name)
+      options[:container_name] = File.basename(`git rev-parse --show-toplevel`.chomp)
+    end
+
+    unless options.key?(:image_name)
+      username = Etc.getlogin
+      git_repository_name = File.basename(`git rev-parse --show-toplevel`.chomp)
+      options[:image_name] = "#{username}/#{git_repository_name}:latest"
     end
 
     {:options => options, :argv => argv, :proceed => proceed, :help => opt_parser.help}
