@@ -31,7 +31,7 @@ Examples:
   #{opts.program_name} --base-image="alpine:3.6" --container-name="amqp-example" --docker-file="/Users/vpeurala/dockerfiles/amqp.example.dockerfile" --image-name="vpeurala/amqp-example:latest" docker-amqp.example
   #{opts.program_name} --base-image="postgres:10-alpine" docker-db
 
-EOS
+      EOS
 
       opts.on("-b", "--base-image IMAGE_NAME", "The Docker base image on which your Dockerfile is built. For example: --base-image=\"postgres:10-alpine\". This will be value of the FROM instruction in the generated Dockerfile if you don't supply an existing Dockerfile to #{$PROGRAM_NAME}. If you don't supply a value to this option, the default value is \"alpine:3.6\".") do |image_name|
         options[:image_name] = image_name
@@ -67,8 +67,8 @@ EOS
         error_message("ERROR: File \"#{docker_file_name}\", given as the value of option -d/--docker-file, is a directory. It must be an ordinary file.")
         proceed = false
       end
-      unless File.readable?(docker_file_name)
-        error_message("ERROR: File \"#{docker_file_name}\", given as the value of option -d/--docker-file, is not readable by user #{Etc.getlogin}.")
+      if (proceed && !File.readable?(docker_file_name))
+        error_message("ERROR: File \"#{docker_file_name}\", given as the value of option -d/--docker-file, is not readable by user \"#{Etc.getlogin}\".")
         proceed = false
       end
     end
