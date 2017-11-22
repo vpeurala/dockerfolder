@@ -1,3 +1,5 @@
+# TODO: Write specs
+=begin
 require "bundler/setup"
 require "launch"
 
@@ -12,3 +14,4 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 end
+=end

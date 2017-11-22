@@ -19,7 +19,7 @@ class CommandLineArgs
     opt_parser = OptionParser.new do |opts|
       opts.program_name = $PROGRAM_NAME
 
-      opts.version = VERSION
+      opts.version = Dockerfolder::VERSION
 
       opts.banner = <<-EOS
 Usage: #{opts.program_name} [OPTIONS] DIRECTORY

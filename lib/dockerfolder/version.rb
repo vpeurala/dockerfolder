@@ -1,1 +1,3 @@
-VERSION = "0.1.0"
+module Dockerfolder
+  VERSION = "0.1.0"
+end
