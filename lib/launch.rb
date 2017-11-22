@@ -4,12 +4,14 @@ require "pp"
 
 class Launch
   def initialize(argv)
-    @options = CommandLineArgs.new().parse_command_line(argv)
+    @configuration = CommandLineArgs.new().parse_command_line(argv)
   end
 
   def run()
-    puts "@options: #{@options}"
-    pp @options
-    pp ARGV
+    unless @configuration[:proceed]
+      puts @configuration[:help]
+    else
+      puts "Starting! #{pp @configuration}"
+    end
   end
 end
