@@ -4,9 +4,8 @@ PROJECT_ROOT_DIR = `git rev-parse --show-toplevel`.chomp
 
 $LOAD_PATH << "#{PROJECT_ROOT_DIR}/lib"
 
-require "launch"
+require "dockerfolder"
 
 if __FILE__ == $PROGRAM_NAME
-  x = Launch.new(ARGV)
-  x.run
+  Dockerfolder.run(ARGV)
 end
