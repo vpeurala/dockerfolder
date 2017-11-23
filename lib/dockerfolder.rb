@@ -5,10 +5,11 @@ require "dockerfolder/version"
 module Dockerfolder
   def self.run(argv)
     configuration = CommandLineArgs.new.parse_command_line(argv)
-    unless configuration[:proceed]
-      puts configuration[:help]
+    if configuration[:proceed]
+      FolderCreator.new({:dirs => configuration[:argv], :options => configuration[:options]}).run
     else
-      FolderCreator.new(configuration).run
+      puts configuration[:help]
+      puts
     end
   end
 end
